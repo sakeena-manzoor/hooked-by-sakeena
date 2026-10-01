@@ -1,0 +1,202 @@
+/* ============================================
+   Custom CSS for Hooked by Sakeena
+   ============================================ */
+
+body {
+  font-family: Arial, sans-serif;
+  color: #4A3B3B;
+}
+
+.letter-spacing {
+  letter-spacing: 2px;
+}
+
+/* Logo text in the navbar — cute handwriting-style font */
+.logo-text {
+  font-family: 'Pacifico', cursive;
+  font-size: 26px;
+  font-style: normal;
+  color: #C87E9E;
+}
+
+/* ============================================
+   NAVBAR LAYOUT
+   Spaces out: logo -- Home/About/Contact -- Shop + icons
+   ============================================ */
+.navbar-collapse {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.primary-nav {
+  margin: 0 auto;
+}
+
+.navbar-actions {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+.shop-link {
+  font-weight: 600;
+  color: #4A3B3B;
+}
+
+.nav-icon {
+  color: #4A3B3B;
+  font-size: 18px;
+}
+
+.nav-icon:hover {
+  color: #C87E9E;
+}
+
+/* On phones, stack everything and center it once the menu opens */
+@media (max-width: 991px) {
+  .navbar-collapse {
+    flex-direction: column;
+    align-items: center;
+  }
+  .navbar-actions {
+    margin-top: 12px;
+  }
+}
+
+/* ============================================
+   HERO SECTION (carousel)
+   Fixed to exactly fill the visible screen height
+   (below the navbar). object-fit: cover keeps the
+   photo looking sharp and centered — some of the
+   far left/right edges may be trimmed to fit exactly,
+   but nothing is stretched or distorted.
+   ============================================ */
+.hero-wrapper {
+  position: relative;
+  width: 100%;
+  height: calc(100vh - 76px); /* 76px ≈ navbar height, so this fits exactly below it */
+  overflow: hidden;
+}
+
+.hero-carousel,
+.hero-carousel .carousel-inner,
+.hero-carousel .carousel-item {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.hero-bg-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.hero-content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+  padding: 0 20px;
+  z-index: 2;
+  text-align: center;
+}
+
+.hero-title {
+  font-size: 46px;
+}
+
+/* ==========================BUTTONS======================== */
+.btn-brand {
+  background-color: #C9DED2;
+  color: #4A3B3B;
+  border: none;
+}
+
+.btn-brand:hover {
+  background-color: #b5cfc1;
+  color: #4A3B3B;
+}
+
+/* ====================== PATTERNS SECTION======================= */
+.bg-light-pink {
+  background-color: #FBF3F2;
+}
+
+.pattern-card {
+  background-color: #FFFFFF;
+  border-radius: 10px;
+  overflow: hidden;           /* keeps the image corners rounded too */
+  box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+}
+
+.pattern-img {
+  width: 100%;
+  height: 200px;
+  object-fit: contain;
+  background-color: #FBF3F2;
+  display: block;
+}
+
+/* === ABOUT SECTION Two columns: text on one side, photo on the other.======== */
+.about-section {
+  background-color: #F3E5E1;
+}
+
+.about-img {
+  width: 85%;
+  height: 300px;
+  object-fit: cover;
+  border-radius: 10px;
+  display: block;
+  margin: 0 auto;
+}
+
+/* ============================================
+   FOOTER (3 columns: Welcome, Quick Links, Newsletter)
+   ============================================ */
+.footer {
+  background-color: #CFE2D8;
+  color: #3E3E3E;
+}
+
+.footer h6 {
+  font-weight: bold;
+  margin-bottom: 18px;
+}
+
+.footer a {
+  color: #3E3E3E;
+  text-decoration: none;
+  display: block;
+  margin-bottom: 10px;
+}
+
+.footer a:hover {
+  text-decoration: underline;
+}
+
+.footer .social-icon {
+  font-size: 20px;
+  color: #3E3E3E;
+  margin-right: 14px;
+}
+
+.footer input[type="email"] {
+  border: none;
+  padding: 10px 12px;
+  width: 100%;
+  margin-bottom: 12px;
+  border-radius: 4px;
+}
+
+.footer-bottom {
+  background-color: #F3E9E9;
+  color: #4A3B3B;
+}
