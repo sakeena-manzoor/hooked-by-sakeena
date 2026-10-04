@@ -21,8 +21,8 @@ function AllForms() {
     <div className="container py-5">
 
       {/* ===== CUSTOMER ===== */}
-      {/* <LoginForm /> */}
-      <SignupForm />
+      <LoginForm />
+      {/* <SignupForm /> */}
       {/* <CustomOrderForm /> */}
       {/* <CheckoutForm /> */}
       {/* <FeedbackForm /> */}
