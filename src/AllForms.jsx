@@ -1,5 +1,5 @@
 // ===== CUSTOMER =====
-import LoginForm from './forms/LoginForm';
+import LoginForm from './Forms/LoginForm';
 import SignupForm from './forms/SignupForm';
 import CustomOrderForm from './forms/CustomOrderForm';
 import CheckoutForm from './forms/CheckoutForm';
