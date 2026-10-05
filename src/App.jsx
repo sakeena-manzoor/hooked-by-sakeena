@@ -2,11 +2,9 @@
 import AllForms from './AllForms.jsx';
 
 function App() {
-  return <AllForms />;
 
-  // Landing page wapas chahiye to upar wali Home ki import comment hatao,
-  // return <AllForms />; ko comment karo aur ye kholo:
   // return <Home />;
+  return <AllForms />;
 }
 
 export default App;
