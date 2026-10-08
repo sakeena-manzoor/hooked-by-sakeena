@@ -21,11 +21,11 @@ function AllForms() {
     <div className="container py-5">
 
       {/* ===== CUSTOMER ===== */}
-      {/* <LoginForm /> */}
-      {/* <SignupForm /> */}
-      {/* <CustomOrderForm /> */}
-      {/* <CheckoutForm /> */}
-      {/* <FeedbackForm /> */}
+      <LoginForm />
+      <SignupForm />
+      <CustomOrderForm />
+      <CheckoutForm />
+      <FeedbackForm />
 
       {/* ===== ADMIN ===== */}
       {/* <AddProduct /> */}

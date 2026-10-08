@@ -1,4 +1,5 @@
 import '../App.css';
+import { Link } from "react-router-dom";
 
 // Products ki list (har product ek object hai, neeche .map() se cards ban jayenge)
 const products = [
@@ -18,24 +19,33 @@ function Home() {
       {/* ============ NAVBAR ============ */}
       <nav id="top" className="navbar navbar-expand-lg navbar-light bg-white py-3 shadow-sm site-navbar">
         <div className="container navbar-layout">
-          <a className="navbar-brand logo-text" href="#top">Hooked by Sakeena</a>
+          <Link className="navbar-brand logo-text" to="#top">Hooked by Sakeena</Link>
           <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
             <span className="navbar-toggler-icon"></span>
           </button>
           <div className="collapse navbar-collapse" id="navMenu">
             <ul className="navbar-nav primary-nav gap-lg-4 text-center">
-              <li className="nav-item"><a className="nav-link" href="#top">Home</a></li>
-              <li className="nav-item"><a className="nav-link" href="#about">About</a></li>
-              <li className="nav-item"><a className="nav-link" href="#site-footer">Contact</a></li>
+              <li className="nav-item"><Link className="nav-link" to="#top">Home</Link></li>
+              <li className="nav-item"><Link className="nav-link" to="#about">About</Link></li>
+              <li className="nav-item"><Link className="nav-link" to="#site-footer">Contact</Link></li>
             </ul>
             <div className="navbar-actions">
-              <a className="nav-link shop-link" href="#patterns">Shop</a>
-              <a className="nav-icon" href="#patterns" aria-label="Search products" title="Search products">
+              <Link className="nav-icon" to="/admin" aria-label="Admin" title="Admin">
+                <i className="bi bi-person-gear"></i>
+              </Link>
+              <Link className="nav-icon" to="/customer" aria-label="Customer" title="Customer">
+                <i className="bi bi-person"></i>
+              </Link>
+              <Link className="nav-icon" to="/rider" aria-label="Rider" title="Rider">
+                <i className="bi bi-bicycle"></i>
+              </Link>
+              <Link className="nav-link shop-link" to="#patterns">Shop</Link>
+              <Link className="nav-icon" to="#patterns" aria-label="Search products" title="Search products">
                 <i className="bi bi-search"></i>
-              </a>
-              <a className="nav-icon" href="#patterns" aria-label="Shopping cart" title="Shopping cart">
+              </Link>
+              <Link className="nav-icon" to="#patterns" aria-label="Shopping cart" title="Shopping cart">
                 <i className="bi bi-bag"></i>
-              </a>
+              </Link>
             </div>
           </div>
         </div>
@@ -61,7 +71,7 @@ function Home() {
         <div className="hero-content text-center text-white">
           <p className="mb-2 small letter-spacing">HANDMADE WITH LOVE</p>
           <h1 className="fw-bold hero-title">Hooked by Sakeena</h1>
-          <a href="#patterns" className="btn btn-brand btn-lg mt-3 px-4">Shop Now</a>
+          <Link to="#patterns" className="btn btn-brand btn-lg mt-3 px-4">Shop Now</Link>
         </div>
       </section>
 
@@ -81,7 +91,7 @@ function Home() {
                     <h5 className="fw-bold">{p.title}</h5>
                     <p className="text-muted small mb-1">{p.desc}</p>
                     <p className="fw-bold mb-2">{p.price}</p>
-                    <a href="#" className="btn btn-brand w-100">Add to Cart</a>
+                    <Link to="#" className="btn btn-brand w-100">Add to Cart</Link>
                   </div>
                 </div>
               </div>
@@ -103,7 +113,7 @@ function Home() {
                 into a little business I'm proud of, and I'm so glad you're here
                 to be part of that journey.
               </p>
-              <a href="#patterns" className="btn btn-outline-dark mt-3">Read More</a>
+              <Link to="#patterns" className="btn btn-outline-dark mt-3">Read More</Link>
             </div>
             <div className="col-lg-6">
               <img src="/about image.jpg" className="about-img" alt="About Hooked by Sakeena" />
@@ -120,27 +130,30 @@ function Home() {
               <h6>Welcome</h6>
               <p className="small">Welcome to this creative space where you can find handmade crochet pieces made with love, one stitch at a time.</p>
               <div className="mt-3">
-                <a href="#" className="social-icon"><i className="bi bi-facebook"></i></a>
-                <a href="#" className="social-icon"><i className="bi bi-instagram"></i></a>
-                <a href="#" className="social-icon"><i className="bi bi-pinterest"></i></a>
+                <Link to="#" className="social-icon"><i className="bi bi-facebook"></i></Link>
+                <Link to="#" className="social-icon"><i className="bi bi-instagram"></i></Link>
+                <Link to="#" className="social-icon"><i className="bi bi-pinterest"></i></Link>
               </div>
             </div>
 
             <div className="col-md-4">
               <h6>Quick Links</h6>
-              <a href="#about">About</a>
-              <a href="#patterns">Shop</a>
-              <a href="#">Privacy Policy</a>
-              <a href="#">Terms ; Conditions</a>
-              <a href="#">Shipping ; Returns</a>
-              <a href="#">Contact Us</a>
+              <Link to="#about">About</Link>
+              <Link to="#patterns">Shop</Link>
+              <Link to="/admin">Admin</Link>
+              <Link to="/customer">Customer</Link>
+              <Link to="/rider">Delivery Rider</Link>
+              <Link to="#">Privacy Policy</Link>
+              <Link to="#">Terms ; Conditions</Link>
+              <Link to="#">Shipping ; Returns</Link>
+              <Link to="#">Contact Us</Link>
             </div>
 
             <div className="col-md-4">
               <h6>Newsletter</h6>
               <p className="small">Sign up for exclusive offers, new arrivals and more.</p>
               <input type="email" placeholder="Your email" />
-              <a href="#" className="btn btn-brand w-100">Subscribe</a>
+              <Link to="#" className="btn btn-brand w-100">Subscribe</Link>
             </div>
           </div>
         </div>

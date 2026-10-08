@@ -5,6 +5,7 @@ function App() {
 
   // return <Home />;
   return <AllForms />;
+
 }
 
 export default App;
