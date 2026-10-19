@@ -6,7 +6,7 @@ const customOrderSchema = z.object({
   orderName: z.string().trim().min(1, "Your name is required"),
   orderProduct: z.string().min(1, "Please select a product"),
   orderQty: z.number({ error: "Quantity is required" }).int("Quantity must be a whole number").min(1, "Quantity must be at least 1"),
-  orderDetails: z.string().optional(),
+  orderDetails: z.string().trim().min(1, "Please enter your special request"),
 });
 
 function CustomOrderForm() {

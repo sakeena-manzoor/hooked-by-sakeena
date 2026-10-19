@@ -7,7 +7,7 @@ const productSchema = z.object({
   productPrice: z.number({ error: "Price is required" }).positive("Price must be greater than 0"),
   productStock: z.number({ error: "Stock quantity is required" }).int("Stock quantity must be a whole number").min(0, "Stock quantity cannot be negative"),
   productCategory: z.string().min(1, "Please select a category"),
-  productImage: z.any().optional(),
+  productImage: z.any().refine((files) => files?.length > 0, "Product image is required"),
 });
 
 function AddProduct() {

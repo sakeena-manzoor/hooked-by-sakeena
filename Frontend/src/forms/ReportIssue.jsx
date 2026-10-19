@@ -5,7 +5,7 @@ import { z } from "zod";
 const reportIssueSchema = z.object({
   issueOrder: z.string().trim().min(1, "Order number is required"),
   issueType: z.string().min(1, "Please select an issue type"),
-  issueDetails: z.string().optional(),
+  issueDetails: z.string().trim().min(1, "Please describe the issue"),
 });
 
 function ReportIssue() {
@@ -31,6 +31,7 @@ function ReportIssue() {
         <div className="mb-3">
           <label htmlFor="issueType" className="form-label">Issue Type</label>
           <select className="form-select" id="issueType" {...register("issueType")}>
+            <option value="">Choose an issue type...</option>
             <option>Customer not available</option>
             <option>Wrong address</option>
             <option>Customer refused order</option>

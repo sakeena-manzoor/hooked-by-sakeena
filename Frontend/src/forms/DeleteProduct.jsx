@@ -24,6 +24,7 @@ function DeleteProduct() {
         <div className="mb-3">
           <label htmlFor="deleteProductSelect" className="form-label">Select Product</label>
           <select className="form-select" id="deleteProductSelect" {...register("deleteProductSelect")}>
+            <option value="">Choose a product...</option>
             <option>Amigurumi Toys</option>
             <option>Crochet Roses &amp; Bouquets</option>
             <option>Garments</option>

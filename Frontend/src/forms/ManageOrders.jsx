@@ -25,6 +25,7 @@ function ManageOrders() {
         <div className="mb-3">
           <label htmlFor="selectOrder" className="form-label">Select Order</label>
           <select className="form-select" id="selectOrder" {...register("selectOrder")}>
+            <option value="">Choose an order...</option>
             <option>#101 - Ayesha - Amigurumi Toys</option>
             <option>#102 - Hira - Crochet Hand Bags</option>
             <option>#103 - Sana - Sunflower Keychain</option>
@@ -34,6 +35,7 @@ function ManageOrders() {
         <div className="mb-3">
           <label htmlFor="orderStatus" className="form-label">Order Status</label>
           <select className="form-select" id="orderStatus" {...register("orderStatus")}>
+            <option value="">Choose a status...</option>
             <option>Pending</option>
             <option>Processing</option>
             <option>Ready for Delivery</option>

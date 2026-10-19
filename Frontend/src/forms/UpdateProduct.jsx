@@ -4,8 +4,16 @@ import { z } from "zod";
 
 const updateProductSchema = z.object({
   selectProduct: z.string().min(1, "Please select a product"),
-  newPrice: z.preprocess((value) => (value === "" ? undefined : Number(value)),z.number({ error: "Price must be a number" }).positive("Price must be greater than 0").optional(), ),
-  newQuantity: z.preprocess((value) => (value === "" ? undefined : Number(value)),z.number({ error: "Quantity must be a number" }).int("Quantity must be a whole number").min(0, "Quantity cannot be negative").optional(),),
+  newPrice: z.preprocess(
+    (value) => (value === "" ? undefined : Number(value)),
+    z.number({ error: "Price is required" }).positive("Price must be greater than 0"),
+  ),
+  newQuantity: z.preprocess(
+    (value) => (value === "" ? undefined : Number(value)),
+    z.number({ error: "Quantity is required" })
+      .int("Quantity must be a whole number")
+      .min(0, "Quantity cannot be negative"),
+  ),
 });
 
 function UpdateProduct() {
@@ -26,6 +34,7 @@ function UpdateProduct() {
         <div className="mb-3">
           <label htmlFor="selectProduct" className="form-label">Select Product</label>
           <select className="form-select" id="selectProduct" {...register("selectProduct")}>
+            <option value="">Choose a product...</option>
             <option>Amigurumi Toys</option>
             <option>Crochet Roses ; Bouquets</option>
             <option>Garments</option>

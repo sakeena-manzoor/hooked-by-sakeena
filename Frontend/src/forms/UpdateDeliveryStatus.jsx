@@ -25,6 +25,7 @@ function UpdateDeliveryStatus() {
         <div className="mb-3">
           <label htmlFor="deliveryOrder" className="form-label">Select Order</label>
           <select className="form-select" id="deliveryOrder" {...register("deliveryOrder")}>
+            <option value="">Choose an order...</option>
             <option>#101 - Ayesha - Amigurumi Toys</option>
             <option>#102 - Hira - Crochet Hand Bags</option>
             <option>#103 - Sana - Sunflower Keychain</option>
@@ -34,6 +35,7 @@ function UpdateDeliveryStatus() {
         <div className="mb-3">
           <label htmlFor="deliveryStatus" className="form-label">Delivery Status</label>
           <select className="form-select" id="deliveryStatus" {...register("deliveryStatus")}>
+            <option value="">Choose a delivery status...</option>
             <option>Picked Up</option>
             <option>Out for Delivery</option>
             <option>Delivered</option>

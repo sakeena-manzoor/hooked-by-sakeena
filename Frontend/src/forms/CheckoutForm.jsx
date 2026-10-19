@@ -42,6 +42,7 @@ function CheckoutForm() {
         <div className="mb-3">
           <label htmlFor="checkoutPayment" className="form-label">Payment Method</label>
           <select className="form-select" id="checkoutPayment" {...register("checkoutPayment")}>
+            <option value="">Choose a payment method...</option>
             <option>Cash on Delivery</option>
             <option>Bank Transfer</option>
             <option>Easypaisa / JazzCash</option>

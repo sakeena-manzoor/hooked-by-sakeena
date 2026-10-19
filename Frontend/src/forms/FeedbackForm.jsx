@@ -5,7 +5,7 @@ import { z } from "zod";
 const feedbackSchema = z.object({
   feedbackName: z.string().trim().min(1, "Your name is required"),
   feedbackRating: z.string().min(1, "Please select a rating"),
-  feedbackComment: z.string().optional(),
+  feedbackComment: z.string().trim().min(1, "Please enter a comment"),
 });
 
 function FeedbackForm() {
@@ -31,6 +31,7 @@ function FeedbackForm() {
         <div className="mb-3">
           <label htmlFor="feedbackRating" className="form-label">Rating</label>
           <select className="form-select" id="feedbackRating" {...register("feedbackRating")}>
+            <option value="">Choose a rating...</option>
             <option>5 - Excellent</option>
             <option>4 - Good</option>
             <option>3 - Okay</option>

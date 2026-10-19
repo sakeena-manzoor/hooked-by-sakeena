@@ -3,7 +3,7 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 
 const riderLoginSchema = z.object({
-  riderId: z.number().trim().min(1, "Rider ID is required"),
+  riderId: z.string().trim().min(1, "Rider ID is required"),
   riderPassword: z.string().min(1, "Password is required"),
 });
 
