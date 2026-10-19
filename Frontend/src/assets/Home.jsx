@@ -30,15 +30,9 @@ function Home() {
               <li className="nav-item"><Link className="nav-link" to="#site-footer">Contact</Link></li>
             </ul>
             <div className="navbar-actions">
-              <Link className="nav-icon" to="/admin" aria-label="Admin" title="Admin">
-                <i className="bi bi-person-gear"></i>
-              </Link>
-              <Link className="nav-icon" to="/customer" aria-label="Customer" title="Customer">
-                <i className="bi bi-person"></i>
-              </Link>
-              <Link className="nav-icon" to="/rider" aria-label="Rider" title="Rider">
-                <i className="bi bi-bicycle"></i>
-              </Link>
+              <Link className="nav-link" to="/admin">Admin</Link>
+              <Link className="nav-link" to="/customer">Customer</Link>
+              <Link className="nav-link" to="/rider">Rider</Link>
               <Link className="nav-link shop-link" to="#patterns">Shop</Link>
               <Link className="nav-icon" to="#patterns" aria-label="Search products" title="Search products">
                 <i className="bi bi-search"></i>
