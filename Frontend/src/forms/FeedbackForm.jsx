@@ -1,6 +1,7 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
+import { feedbackAxiosFunction } from "../services/api.js";
 
 const feedbackSchema = z.object({
   feedbackName: z.string().trim().min(1, "Your name is required"),
@@ -15,8 +16,14 @@ function FeedbackForm() {
     formState: { errors },
   } = useForm({ resolver: zodResolver(feedbackSchema) });
 
-  function handleFeedbackSubmit() {
-    alert("Thank you for your feedback! (demo)");
+  async function handleFeedbackSubmit(data) {
+    try {
+      await feedbackAxiosFunction(data);
+      alert("Thank you for your feedback!");
+    } catch (error) {
+      console.error("Error submitting feedback:", error);
+      alert(error.response?.data?.message || "Failed to submit feedback.");
+    }
   }
 
   return (

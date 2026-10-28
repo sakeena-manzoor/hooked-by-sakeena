@@ -1,6 +1,7 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
+import { riderLoginAxiosFunction } from "../services/api.js";
 
 const riderLoginSchema = z.object({
   riderId: z.string().trim().min(1, "Rider ID is required"),
@@ -14,8 +15,14 @@ function RiderLogin() {
     formState: { errors },
   } = useForm({ resolver: zodResolver(riderLoginSchema) });
 
-  function handleRiderLoginSubmit() {
-    alert("Rider login successful! (demo)");
+  async function handleRiderLoginSubmit(data) {
+    try {
+      await riderLoginAxiosFunction(data);
+      alert("Rider login successful!");
+    } catch (error) {
+      console.error("Error logging in rider:", error);
+      alert(error.response?.data?.message || "Failed to log in.");
+    }
   }
 
   return (

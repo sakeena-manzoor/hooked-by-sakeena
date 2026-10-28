@@ -1,6 +1,11 @@
+import { useEffect, useState } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
+import {
+  getOrdersAxiosFunction,
+  updateDeliveryStatusAxiosFunction,
+} from "../services/api.js";
 
 const deliveryStatusSchema = z.object({
   deliveryOrder: z.string().min(1, "Please select an order"),
@@ -8,14 +13,30 @@ const deliveryStatusSchema = z.object({
 });
 
 function UpdateDeliveryStatus() {
+  const [orders, setOrders] = useState([]);
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm({ resolver: zodResolver(deliveryStatusSchema) });
 
-  function handleDeliveryStatusSubmit() {
-    alert("Delivery status updated! (demo)");
+  useEffect(() => {
+    getOrdersAxiosFunction()
+      .then((response) => setOrders(response.data))
+      .catch((error) => {
+        console.error("Error loading orders:", error);
+        alert(error.response?.data?.message || "Failed to load orders.");
+      });
+  }, []);
+
+  async function handleDeliveryStatusSubmit(data) {
+    try {
+      await updateDeliveryStatusAxiosFunction(data.deliveryOrder, data.deliveryStatus);
+      alert("Delivery status updated successfully!");
+    } catch (error) {
+      console.error("Error updating delivery status:", error);
+      alert(error.response?.data?.message || "Failed to update delivery status.");
+    }
   }
 
   return (
@@ -26,9 +47,11 @@ function UpdateDeliveryStatus() {
           <label htmlFor="deliveryOrder" className="form-label">Select Order</label>
           <select className="form-select" id="deliveryOrder" {...register("deliveryOrder")}>
             <option value="">Choose an order...</option>
-            <option>#101 - Ayesha - Amigurumi Toys</option>
-            <option>#102 - Hira - Crochet Hand Bags</option>
-            <option>#103 - Sana - Sunflower Keychain</option>
+            {orders.map((order) => (
+              <option key={order._id} value={order._id}>
+                #{order._id.slice(-6)} - {order.customerName} - {order.productName}
+              </option>
+            ))}
           </select>
           {errors.deliveryOrder && <span className="text-danger">{errors.deliveryOrder.message}</span>}
         </div>

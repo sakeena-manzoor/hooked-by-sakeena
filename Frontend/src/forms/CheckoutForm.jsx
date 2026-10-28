@@ -1,6 +1,7 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
+import { checkoutAxiosFunction } from "../services/api.js";
 
 const checkoutSchema = z.object({
   checkoutName: z.string().trim().min(1, "Full name is required"),
@@ -16,8 +17,14 @@ function CheckoutForm() {
     formState: { errors },
   } = useForm({ resolver: zodResolver(checkoutSchema) });
 
-  function handleCheckoutSubmit() {
-    alert("Order confirmed! (demo)");
+  async function handleCheckoutSubmit(data) {
+    try {
+      await checkoutAxiosFunction(data);
+      alert("Checkout saved successfully!");
+    } catch (error) {
+      console.error("Error saving checkout:", error);
+      alert(error.response?.data?.message || "Failed to confirm checkout.");
+    }
   }
 
   return (

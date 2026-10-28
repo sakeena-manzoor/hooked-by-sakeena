@@ -1,6 +1,11 @@
+import { useEffect, useState } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
+import {
+  getOrdersAxiosFunction,
+  updateOrderStatusAxiosFunction,
+} from "../services/api.js";
 
 const manageOrdersSchema = z.object({
   selectOrder: z.string().min(1, "Please select an order"),
@@ -8,14 +13,30 @@ const manageOrdersSchema = z.object({
 });
 
 function ManageOrders() {
+  const [orders, setOrders] = useState([]);
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm({ resolver: zodResolver(manageOrdersSchema) });
 
-  function handleManageOrdersSubmit() {
-    alert("Order status updated! (demo)");
+  useEffect(() => {
+    getOrdersAxiosFunction()
+      .then((response) => setOrders(response.data))
+      .catch((error) => {
+        console.error("Error loading orders:", error);
+        alert(error.response?.data?.message || "Failed to load orders.");
+      });
+  }, []);
+
+  async function handleManageOrdersSubmit(data) {
+    try {
+      await updateOrderStatusAxiosFunction(data.selectOrder, data.orderStatus);
+      alert("Order status updated successfully!");
+    } catch (error) {
+      console.error("Error updating order status:", error);
+      alert(error.response?.data?.message || "Failed to update order status.");
+    }
   }
 
   return (
@@ -26,9 +47,11 @@ function ManageOrders() {
           <label htmlFor="selectOrder" className="form-label">Select Order</label>
           <select className="form-select" id="selectOrder" {...register("selectOrder")}>
             <option value="">Choose an order...</option>
-            <option>#101 - Ayesha - Amigurumi Toys</option>
-            <option>#102 - Hira - Crochet Hand Bags</option>
-            <option>#103 - Sana - Sunflower Keychain</option>
+            {orders.map((order) => (
+              <option key={order._id} value={order._id}>
+                #{order._id.slice(-6)} - {order.customerName} - {order.productName}
+              </option>
+            ))}
           </select>
           {errors.selectOrder && <span className="text-danger">{errors.selectOrder.message}</span>}
         </div>

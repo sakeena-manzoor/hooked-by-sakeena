@@ -1,6 +1,7 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
+import { signupAxiosFunction } from "../services/api.js";
 
 const signupSchema = z
   .object({
@@ -21,8 +22,14 @@ function SignupForm() {
     formState: { errors },
   } = useForm({ resolver: zodResolver(signupSchema) });
 
-  function handleSignupSubmit() {
-    alert("Account created! (demo)");
+  async function handleSignupSubmit(data) {
+    try {
+      await signupAxiosFunction(data);
+      alert("Account created successfully!");
+    } catch (error) {
+      console.error("Error creating account:", error);
+      alert(error.response?.data?.message || "Failed to create account.");
+    }
   }
 
   return (

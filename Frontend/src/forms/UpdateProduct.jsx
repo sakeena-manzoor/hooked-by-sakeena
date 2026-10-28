@@ -1,15 +1,18 @@
+import { useEffect, useState } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
+import {
+  getProductsAxiosFunction,
+  updateProductAxiosFunction,
+} from "../services/api.js";
 
 const updateProductSchema = z.object({
   selectProduct: z.string().min(1, "Please select a product"),
-  newPrice: z.preprocess(
-    (value) => (value === "" ? undefined : Number(value)),
+  newPrice: z.preprocess((value) => (value === "" ? undefined : Number(value)),
     z.number({ error: "Price is required" }).positive("Price must be greater than 0"),
   ),
-  newQuantity: z.preprocess(
-    (value) => (value === "" ? undefined : Number(value)),
+  newQuantity: z.preprocess((value) => (value === "" ? undefined : Number(value)),
     z.number({ error: "Quantity is required" })
       .int("Quantity must be a whole number")
       .min(0, "Quantity cannot be negative"),
@@ -17,14 +20,32 @@ const updateProductSchema = z.object({
 });
 
 function UpdateProduct() {
+  const [products, setProducts] = useState([]);
   const {
     register,
     handleSubmit,
-    formState: { errors },
-  } = useForm({ resolver: zodResolver(updateProductSchema) });
+    formState: { errors },} = useForm({ resolver: zodResolver(updateProductSchema) });
 
-  function handleUpdateProductSubmit() {
-    alert("Product updated! (demo)");
+  useEffect(() => {
+    getProductsAxiosFunction()
+      .then((response) => setProducts(response.data))
+      .catch((error) => {
+        console.error("Error loading products:", error);
+        alert(error.response?.data?.message || "Failed to load products.");
+      });
+  }, []);
+
+  async function handleUpdateProductSubmit(data) {
+    try {
+      await updateProductAxiosFunction(data.selectProduct, {
+        productPrice: data.newPrice,
+        productStock: data.newQuantity,
+      });
+      alert("Product updated successfully!");
+    } catch (error) {
+      console.error("Error updating product:", error);
+      alert(error.response?.data?.message || "Failed to update product.");
+    }
   }
 
   return (
@@ -35,14 +56,9 @@ function UpdateProduct() {
           <label htmlFor="selectProduct" className="form-label">Select Product</label>
           <select className="form-select" id="selectProduct" {...register("selectProduct")}>
             <option value="">Choose a product...</option>
-            <option>Amigurumi Toys</option>
-            <option>Crochet Roses ; Bouquets</option>
-            <option>Garments</option>
-            <option>Bow Keychain</option>
-            <option>Crochet Hand Bags</option>
-            <option>Sunflower Keychain</option>
-            <option>Cherry Keychain</option>
-            <option>Crochet Lilly Flower</option>
+            {products.map((product) => (
+              <option key={product._id} value={product._id}>{product.productName}</option>
+            ))}
           </select>
           {errors.selectProduct && <span className="text-danger">{errors.selectProduct.message}</span>}
         </div>

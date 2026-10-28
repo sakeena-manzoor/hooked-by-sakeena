@@ -1,6 +1,7 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
+import { reportIssueAxiosFunction } from "../services/api.js";
 
 const reportIssueSchema = z.object({
   issueOrder: z.string().trim().min(1, "Order number is required"),
@@ -15,8 +16,14 @@ function ReportIssue() {
     formState: { errors },
   } = useForm({ resolver: zodResolver(reportIssueSchema) });
 
-  function handleReportIssueSubmit() {
-    alert("Issue reported! (demo)");
+  async function handleReportIssueSubmit(data) {
+    try {
+      await reportIssueAxiosFunction(data);
+      alert("Issue reported successfully!");
+    } catch (error) {
+      console.error("Error reporting delivery issue:", error);
+      alert(error.response?.data?.message || "Failed to submit report.");
+    }
   }
 
   return (

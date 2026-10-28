@@ -1,6 +1,7 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
+import { placeOrderAxiosFunction } from "../services/api.js";
 
 const customOrderSchema = z.object({
   orderName: z.string().trim().min(1, "Your name is required"),
@@ -16,8 +17,14 @@ function CustomOrderForm() {
     formState: { errors },
   } = useForm({ resolver: zodResolver(customOrderSchema) });
 
-  function handleCustomOrderSubmit() {
-    alert("Order placed! (demo)");
+  async function handleCustomOrderSubmit(data) {
+    try {
+      await placeOrderAxiosFunction(data);
+      alert("Order placed successfully!");
+    } catch (error) {
+      console.error("Error placing order:", error);
+      alert(error.response?.data?.message || "Failed to place order.");
+    }
   }
 
   return (

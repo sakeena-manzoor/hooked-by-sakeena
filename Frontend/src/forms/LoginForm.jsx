@@ -1,6 +1,7 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
+import { loginAxiosFunction } from "../services/api.js";
 
 const loginSchema = z.object({
   loginEmail: z.string().trim().min(1, "Email is required").email("Enter a valid email address"),
@@ -14,8 +15,14 @@ function LoginForm() {
     formState: { errors },
   } = useForm({ resolver: zodResolver(loginSchema) });
 
-  function handleLoginSubmit() {
-    alert("Login successful! (demo)");
+  async function handleLoginSubmit(data) {
+    try {
+      await loginAxiosFunction(data);
+      alert("Login successful!");
+    } catch (error) {
+      console.error("Error logging in:", error);
+      alert(error.response?.data?.message || "Failed to log in.");
+    }
   }
 
   return (

@@ -1,6 +1,7 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
+import { addProductAxiosFunction } from "../services/api.js";
 
 const productSchema = z.object({
   productName: z.string().trim().min(1, "Product name is required"),
@@ -17,8 +18,14 @@ function AddProduct() {
     formState: { errors },
   } = useForm({ resolver: zodResolver(productSchema) });
 
-  function handleProductSubmit() {
-    alert("Product added! (demo)");
+  async function handleProductSubmit(data) {
+    try {
+      await addProductAxiosFunction(data);
+      alert("Product added successfully!");
+    } catch (error) {
+      console.error("Error adding product:", error);
+      alert(error.response?.data?.message || "Failed to add product.");
+    }
   }
 
   return (
@@ -45,7 +52,7 @@ function AddProduct() {
           <select className="form-select" id="productCategory" {...register("productCategory")}>
             <option value="">Choose...</option>
             <option>Amigurumi Toys</option>
-            <option>Flowers &amp; Bouquets</option>
+            <option>Flowers; Bouquets</option>
             <option>Garments</option>
             <option>Keychains</option>
             <option>Hand Bags</option>
