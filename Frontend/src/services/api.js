@@ -53,6 +53,10 @@ export async function riderLoginAxiosFunction(data) {
   return await axios.post("http://localhost:3000/riders/login", data);
 }
 
+export async function riderSignupAxiosFunction(data) {
+  return await axios.post("http://localhost:3000/riders/signup", data);
+}
+
 export async function updateDeliveryStatusAxiosFunction(id, deliveryStatus) {
   return await axios.patch(`http://localhost:3000/riders/orders/${id}/status`, { deliveryStatus });
 }

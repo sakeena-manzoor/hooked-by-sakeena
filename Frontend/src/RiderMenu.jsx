@@ -19,6 +19,7 @@ function RiderMenu() {
         <div className="collapse navbar-collapse" id="riderMenu">
           <ul className="navbar-nav ms-auto">
             <li className="nav-item"><Link className="nav-link" to="/rider-login">Rider Login</Link></li>
+            <li className="nav-item"><Link className="nav-link" to="/rider-signup">Rider Sign Up</Link></li>
             <li className="nav-item"><Link className="nav-link" to="/update-delivery-status">Update Delivery Status</Link></li>
             <li className="nav-item"><Link className="nav-link" to="/report-issue">Report Issue</Link></li>
           </ul>

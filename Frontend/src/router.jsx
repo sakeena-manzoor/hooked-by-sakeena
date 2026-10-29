@@ -11,6 +11,7 @@ import LoginForm from "./forms/LoginForm.jsx";
 import ManageOrders from "./forms/ManageOrders.jsx";
 import ReportIssue from "./forms/ReportIssue.jsx";
 import RiderLogin from "./forms/RiderLogin.jsx";
+import RiderSignUp from "./forms/RiderSignUp.jsx";
 import SignupForm from "./forms/SignupForm.jsx";
 import UpdateDeliveryStatus from "./forms/UpdateDeliveryStatus.jsx";
 import UpdateProduct from "./forms/UpdateProduct.jsx";
@@ -31,6 +32,8 @@ export const router = createBrowserRouter([
   { path: "/feedback", element: <><CustomerMenu /><div className="container py-5"><FeedbackForm /></div></> },
   { path: "/rider", element: <RiderMenu /> },
   { path: "/rider-login", element: <><RiderMenu /><div className="container py-5"><RiderLogin /></div></> },
+  { path: "/rider-signin", element: <><RiderMenu /><div className="container py-5"><RiderSignUp /></div></> },
+  { path: "/rider-signup", element: <><RiderMenu /><div className="container py-5"><RiderSignUp /></div></> },
   { path: "/update-delivery-status", element: <><RiderMenu /><div className="container py-5"><UpdateDeliveryStatus /></div></> },
   { path: "/report-issue", element: <><RiderMenu /><div className="container py-5"><ReportIssue /></div></> },
 ]);
